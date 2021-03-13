@@ -7,7 +7,16 @@ Route::get('admin-login', function(){
 })->name('admin.login');
 
 //admin area
-Route::get('/admin/home', [App\Http\Controllers\HomeController::class, 'adminIndex'])->name('admin.home')->middleware('is_admin');
+
+
+
+Route::group(['namespace'=>'App\Http\Controllers\Admin','middleware'=>'is_admin'], function(){
+	
+	Route::get('/admin/home', 'AdminController@adminIndex')->name('admin.home');
+	Route::get('/admin/logout','AdminController@adminLogout')->name('admin.logout');
+
+
+});
 
 
 
